@@ -1,7 +1,8 @@
 # Automating-codechef-submissions
 
-I want to make a python program for automating codechef submissions on google chrome for my college project.
+A python-based script to automatically login and submit the code in solution file to the given problem code.
 
-If you add a doc file too explaining the use of selenium and google chrome driver for this project, it would be much appreciated.
-
-Thanks!!
+Prerequisites:
+1. Python 3+
+2. Selenium
+3. Chromedriver
