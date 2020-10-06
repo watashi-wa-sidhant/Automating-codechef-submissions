@@ -19,7 +19,7 @@ def login_to_codechef (username,password) :
     return driver
 
 
-def submit_solution (problemLink,submissionFile,driver) :
+def submit_solution (problemLink,submissionFile,driver, language) :
     driver.get(problemLink)
     mode = driver.find_element_by_xpath('//*[@id="edit-submit"]')
     if mode.get_attribute("value") == 'Switch to Non-IDE mode':
@@ -48,8 +48,13 @@ def submit_solution (problemLink,submissionFile,driver) :
     area.send_keys(code)
     
     time.sleep(10)
+    # select programming language
+    driver.find_element_by_xpath("//select[@id='edit-language']/option[text()='"+language+"']").click()
+
     button = driver.find_element_by_xpath('//*[@id="edit-submit-1"]')
     driver.execute_script("arguments[0].click();", button)
+    # logout
+    driver.find_element_by_link_text('Logout').click()
     
     
 if __name__ == "__main__":
@@ -59,10 +64,11 @@ if __name__ == "__main__":
     password=parser.get('credentials', 'password')
     problemLink =parser.get('submission', 'problemLink')
     submissionFile =parser.get('submission', 'submissionFile')
+    language = parser.get('submission', 'programmingLanguage')
     print("=================================")
     driver = login_to_codechef(username,password)
     print("Submitting the code...")
-    submit_solution(problemLink,submissionFile,driver)
+    submit_solution(problemLink,submissionFile,driver,language)
     print("code submitted") 
     print("=================================")
     
