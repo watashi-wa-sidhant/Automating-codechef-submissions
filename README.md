@@ -7,4 +7,5 @@ Prerequisites:
 2. Selenium
 3. Chromedriver
 
+Copy chromedriver.exe in the code folder.
 Make sure you are logged out of codechef before running the script.

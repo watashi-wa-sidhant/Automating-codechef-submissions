@@ -1,5 +1,3 @@
-# github : rkgeekoftheweek
-
 from selenium import webdriver
 from getpass import getpass
 from configparser import ConfigParser
@@ -21,18 +19,12 @@ def login_to_codechef (username,password) :
 
 def submit_solution (problemLink,submissionFile,driver, language) :
     driver.get(problemLink)
-    mode = driver.find_element_by_xpath('//*[@id="edit-submit"]')
-    if mode.get_attribute("value") == 'Switch to Non-IDE mode':
-        mode.click()
     
     time.sleep(5)
-    toggle = driver.find_element_by_id('edit_area_toggle_checkbox_edit-program')
     temp = driver.find_element_by_xpath('//*[@id="cc-footer-div"]/div[2]/div[1]/ul/li[1]/a')
 
     action = action_chains.ActionChains(driver)
     action.move_to_element(temp).perform()
-    toggle.click()
-
     
     print("======================")
     with open(submissionFile, "r") as file:
@@ -53,6 +45,8 @@ def submit_solution (problemLink,submissionFile,driver, language) :
 
     button = driver.find_element_by_xpath('//*[@id="edit-submit-1"]')
     driver.execute_script("arguments[0].click();", button)
+
+    time.sleep(20)
     # logout
     driver.find_element_by_link_text('Logout').click()
     
@@ -71,5 +65,3 @@ if __name__ == "__main__":
     submit_solution(problemLink,submissionFile,driver,language)
     print("code submitted") 
     print("=================================")
-    
-    
